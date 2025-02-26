@@ -9,8 +9,7 @@ import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-user-form',
   imports: [CommonModule,FormsModule],
-  templateUrl: './user-form.component.html',
-  styleUrl: './user-form.component.css'
+  templateUrl: './user-form.component.html'
 })
 
 export class UserFormComponent {
@@ -26,8 +25,8 @@ export class UserFormComponent {
     }
 
     onSubmit(){
-      this.userService.save(this.user).subscribe(
-        result => this.gotUserList(),
-        error => console.error('Error al enviar los datos',error))
+      this.userService.save(this.user).subscribe({
+        next: value => this.gotUserList(),
+        error: error => console.error('Error al enviar los datos',error)})
     }
 }
