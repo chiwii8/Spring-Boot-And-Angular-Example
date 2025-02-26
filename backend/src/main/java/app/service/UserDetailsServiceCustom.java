@@ -34,8 +34,13 @@ public class UserDetailsServiceCustom implements UserDetailsService {
         Optional<UserAccount> userAccount = this.userAccountRepository.findByUsername(username);
 
         if(userAccount.isPresent()){
-            return userAccount.get();
+            UserAccount userAccount1 = userAccount.get();
+            userAccount1.setActive(true);
+            this.userAccountRepository.save(userAccount1);
+            return userAccount1;
         }
         throw new UsernameNotFoundException("The username is not found");
     }
+
+
 }
